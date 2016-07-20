@@ -1,0 +1,42 @@
+Def_Driver  'Dayton' 
+ dD=16.3984cm  |Piston 
+ fs=30.3Hz  Mms=36.1g  Qms=3.06 
+ Qes=0.49 Re=6.41ohm  Le=2.32mH  ExpoLe=0.618 
+ 
+
+ 
+ 
+ System 'S1_BassReflex_BB4QL7' 
+ 
+Driver 'D1' Def='Dayton' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=36.4929L  Qb/fo=1 Lb=53.6222cm Sb=1769.44cm2
+ fb=30.3Hz  dD=2.73307cm 
+ 
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+  HEdge=53.6222cm WEdge=32.9983cm
+ 
+ 
+ System 'S2_BassReflex_QB3QL7' 
+ 
+Driver 'D1' Def='Dayton' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=50.4192L  Qb/fo=1 Lb=59.7229cm Sb=2194.97cm2
+ fb=29.3395Hz  dD=2.73307cm 
+ 
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+  HEdge=59.7229cm WEdge=36.7526cm
+ 
+ 
+ System 'S3_BassReflex_C4QL7' 
+ 
+Driver 'D1' Def='Dayton' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=50.1481L  Qb/fo=1 Lb=59.6157cm Sb=2187.1cm2
+ fb=29.2759Hz  dD=2.73307cm 
+ 
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+  HEdge=59.6157cm WEdge=36.6866cm
