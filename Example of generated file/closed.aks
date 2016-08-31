@@ -1,0 +1,69 @@
+Def_Driver  '3FE22' 
+ dD=8.1cm  |Piston 
+ fs=110Hz  Mms=2.8g  Qms=4.9 
+ dD1=2.6cm  tD1=1.2cm 
+  Qes=0.64 Re=12.3ohm  Le=0.1mH  ExpoLe=0.618 
+ 
+System 'S1_clos_Qtc_500' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=4.04945L  Qb/fo=1 Lb=25.7676cm Sb=408.597cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S2_clos_Qtc_577' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=1.47493L  Qb/fo=1 Lb=18.402cm Sb=208.391cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S3_clos_Qtc_707' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.646963L  Qb/fo=1 Lb=13.982cm Sb=120.305cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S4_clos_Qtc_800' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.439713L  Qb/fo=1 Lb=12.2932cm Sb=92.9988cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S5_clos_Qtc_900' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.316667L  Qb/fo=1 Lb=11.019cm Sb=74.7193cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S6_clos_Qtc_1000' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.241405L  Qb/fo=1 Lb=10.066cm Sb=62.3536cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S7_clos_Qtc_1100' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.190943L  Qb/fo=1 Lb=9.30916cm Sb=53.3295cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S8_clos_Qtc_1200' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.155455L  Qb/fo=1 Lb=8.69248cm Sb=46.498cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 
+System 'S9_clos_Qtc_1500' 
+ 
+Driver 'D1' Def='3FE22' Node=0=1=2=21
+Enclosure    'E1'  Node=2
+   Vb=0.0939561L  Qb/fo=1 Lb=7.34938cm Sb=33.239cm2
+  Radiator  'Rad1'  Def='D1' Node=21 
+  x=0  y=0  z=0cm  HAngle=0  VAngle=0 

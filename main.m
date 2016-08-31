@@ -2,24 +2,25 @@
 % Define the characteristics of the speakers
 
 clear variables; close all;clc;
-
+addpath('Toolbox')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%       User part      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define speaker bass characteristics
-speaker.name='Dayton';
-speaker.fs=30.3;
-speaker.Qes=0.49;
+speaker.name='3FE22';
+speaker.fs=110;
+speaker.Qes=0.64;
 % speaker.Qtc=0.2;
-speaker.Qts=0.42;
-speaker.Qms=3.06;
-speaker.Vas=45.7;
-speaker.Sd=211.2; speaker.r=sqrt(speaker.Sd/pi);% area of the speaker membrane and radius in [cm]
-% speaker.dD1=2;% dustcap diameter [cm]
-speaker.Re=6.41; %equivalent resistor [Ohm]
-speaker.Mms=36.1;% equivalent mass of the speaker [g]
-speaker.Le=2.32;% inductance of the speaker [mH]
-speaker.Cms=0.77; %[mm/N]
+speaker.Qts=0.45;
+speaker.Qms=4.9;
+speaker.Vas=0.95;
+speaker.r=8.1/2;% area of the speaker membrane and radius in [cm]
+speaker.dD1=2.6;% dustcap diameter [cm]
+speaker.tD1=1.2;
+speaker.Re=12.3; %equivalent resistor [Ohm]
+speaker.Mms=2.8;% equivalent mass of the speaker [g]
+speaker.Le=0.1;% inductance of the speaker [mH]
 
+% load('DaytonDC200.mat')
 %% Define speaker tweeter characteristics
 speaker2.name='28-847SE';
 speaker2.fs=850;
@@ -31,7 +32,7 @@ speaker2.Re=7.8;
 
 
 %% Options
-ct.diffraction=1;% boolean variable 1 for diffraction of the enclosure edge 0 else;
+ct.diffraction=0;% boolean variable 1 for diffraction of the enclosure edge 0 else;
 bassreflex.dv=speaker.r/3;% size of the vent for the BassReflex
 
 
