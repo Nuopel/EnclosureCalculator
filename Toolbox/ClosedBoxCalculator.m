@@ -44,14 +44,24 @@ closedbox.fc=ct.Qtc*1e-3*speaker.fs/speaker.Qts;% resonance frequency of the clo
 closedbox.f3=((1./ct.Qtc.^2-2+sqrt((1./ct.Qtc.^2-2).^2+4))/2).^(1/2).*closedbox.fc;% -3db cut off
 % not working ?
 %% Define ratio size of the different enclosure configuration 
+closedbox.thickness=15e-3;%thickness of the wood
 ct.EnclosureClosedRatio=(closedbox.Vb/ct.width/ct.height/ct.length).^(1/3);
-
 closedbox.height=ct.EnclosureClosedRatio*ct.height*1e1; %hauteur
 closedbox.width=ct.EnclosureClosedRatio*ct.width*1e1; %largeur
 closedbox.length=ct.EnclosureClosedRatio*ct.length*1e1; %profondeur
 
 AkabakClosedBoxScript(speaker,closedbox,ct)
 
+%% solve all the volume configuration keeping the ratio for the exterior
+sol = SolveBox(closedbox.Vb(ii)*1e-3,closedbox.thickness,ct);
+for ii=2:numel(closedbox.Vb)
+sol = [sol, SolveBox(closedbox.Vb(ii)*1e-3,closedbox.thickness,ct)];
+end
+temp=fieldnames(sol);
+
+sol=cell2struct(num2cell(cell2mat(squeeze(struct2cell(sol))),2),temp);
+closedbox= catstruct(closedbox,sol);
+clear sol temp
 
 end
 

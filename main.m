@@ -13,27 +13,38 @@ speaker.Qes=0.64;
 speaker.Qts=0.45;
 speaker.Qms=4.9;
 speaker.Vas=0.95;
-speaker.r=8.1/2;% area of the speaker membrane and radius in [cm]
-speaker.dD1=2.6;% dustcap diameter [cm]
-speaker.tD1=1.2;
+
+speaker.dD=16.4;% diameter of the speaker membrane  [cm]
+speaker.r=speaker.dD/2; %radius 
+speaker.tD1=2.5; % Inner depth of cone to base of dust cap [cm]
+speaker.dD1=2.5; %Diameter of dust cap [cm]
+speaker.hD1=1; %Height of dust cap  [cm]
+
 speaker.Re=12.3; %equivalent resistor [Ohm]
 speaker.Mms=2.8;% equivalent mass of the speaker [g]
 speaker.Le=0.1;% inductance of the speaker [mH]
-
-% load('DaytonDC200.mat')
+speaker.Bl=9.5;% N/A
+% load('Savedspeaker/DaytonDC200.mat')
 %% Define speaker tweeter characteristics
 speaker2.name='28-847SE';
 speaker2.fs=850;
 speaker2.Qes=1.47;
 speaker2.Qts=0.87;
-speaker2.r=3.048/2;% area of the speaker membrane and radius in [cm]
-speaker2.tD1=0.5;% dustcap diameter [cm]
-speaker2.Re=7.8;
+speaker2.Qms=2.13;
+speaker2.Mms=0.32;
 
+speaker2.dD=2.548;% diameter of the speaker membrane  [cm]
+speaker2.r=speaker.dD/2; %radius 
+speaker2.tD1=0.5; % Inner depth of cone to base of dust cap [cm]
+speaker2.dD1=2.5; %Diameter of dust cap [cm]
+speaker2.hD1=0.8; %Height of dust cap  [cm]
+
+speaker2.Re=7.8;
+speaker2.Le=0.016;
 
 %% Options
 ct.diffraction=0;% boolean variable 1 for diffraction of the enclosure edge 0 else;
-bassreflex.dv=speaker.r/3;% size of the vent for the BassReflex
+bassreflex.dv=speaker.r/2;% size of the vent for the BassReflex
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,6 +109,6 @@ Filter.Rcb=1.25*speaker.Re;
 Filter.Cb=speaker.Le*1e-3/Filter.Rcb^2;
 else
     fprintf('\nUnable to calculate the impedance compesation \n Filter for the tweeter due to lack of informations\n')
-end
+end 
 %% clear
 % clear ct

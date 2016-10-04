@@ -1,0 +1,38 @@
+//*****************************************************************************
+//
+// ABEC2 Observation
+// Project: SP38
+//
+//*****************************************************************************
+
+     
+Nodes "Contour"
+  Scale=1mm
+  Rot=0,0,90
+  // Vertical
+  1001  -800  0  300
+  1002  -800  0  -300
+  1003 00  0  -300
+  1004 00  0  300
+  // Horizontal
+  2001  -800  -200  -85
+  2002  -800  200 -85
+  2003 0  200  -85
+  2004 0  -200  -85
+
+ 
+Field "Contour Vert"
+  RefNodes="Contour" 
+  EdgeLength=10mm
+  BodeType=LeveldB;  StepSize=1; Range=80 
+  //BodeType=Phase
+  Alpha=1
+  101   1001  1002  1003  1004  
+   
+Field "Contour Horiz"
+  RefNodes="Contour" 
+  EdgeLength=80mm
+  BodeType=LeveldB;  StepSize=1; Range=50 
+  Alpha=0.8
+  101   2001  2002  2003  2004
+     

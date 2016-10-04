@@ -47,12 +47,23 @@ bassreflex.fb=speaker.fs*bassreflex.line(:,2);% resonance frequency of the close
 bassreflex.f3=bassreflex.line(:,4)*speaker.fs;% -3db cut off
 % not working ?
 %% Define ratio size of the different enclosure configuration 
-ct.BassReflexRatio=(bassreflex.Vb/ct.width/ct.height/ct.length).^(1/3);
 
+ct.BassReflexRatio=(bassreflex.Vb/ct.width/ct.height/ct.length).^(1/3);
 bassreflex.height=ct.BassReflexRatio*ct.height*1e1; %hauteur
 bassreflex.width=ct.BassReflexRatio*ct.width*1e1; %largeur
 bassreflex.length=ct.BassReflexRatio*ct.length*1e1; %profondeur
 AkabakBassreflexScript(speaker,bassreflex,ct)
 
+%% solve all the volume configuration
+bassreflex.thickness=15e-3;%thickness of the wood ex 15mm
+sol = SolveBox(bassreflex.Vb(ii)*1e-3,bassreflex.thickness,ct);
+for ii=2:numel(bassreflex.Vb)
+sol = [sol, SolveBox(bassreflex.Vb(ii)*1e-3,bassreflex.thickness,ct)];
+end
+temp=fieldnames(sol);
+
+sol=cell2struct(num2cell(cell2mat(squeeze(struct2cell(sol))),2),temp);
+bassreflex= catstruct(bassreflex,sol);
+clear sol temp
 end
 

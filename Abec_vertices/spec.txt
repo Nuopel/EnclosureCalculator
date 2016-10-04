@@ -1,0 +1,80 @@
+//*****************************************************************************
+//
+// ABEC2 Observation
+// Project: SP38
+//
+//*****************************************************************************
+  
+
+Control_Spectrum
+  Name="cqnqdq_enceinte"
+  ID=SP38_2v
+  NumFrequencies=200; Abscissa=log;  
+
+
+Nodes "Spectrum"
+  Scale=1mm
+  Rotate= 0, 0, 0
+  1001   -160      300   -1000  // Center vent
+  1002   0      500    0  
+  1003   0      1000    0 
+  1004     0      3000    0  
+  1005  -100      0    125.0  // Inside vent
+  1006  -225      0    125.0  // Between rear wall and vent
+  
+  2000   1000      0    413.5  // On-axis speaker
+  2001    700      0    413.5  
+  2002    500      0    413.5 
+  2003    200      0    413.5 
+  2004    100      0    413.5 
+
+        
+BE_Spectrum
+  PlotType=Curves
+  RefNodes="Spectrum"
+  GraphHeader="SPL front"
+  BodeType=LeveldB;  Range=50
+  201   1001  ID=101   //  300mm external
+  //102   1002  ID=102   //  200mm external
+  //103   1003  ID=103   //  100mm external
+  //104   1004  ID=104   //    0mm external
+ // 105   1003  ID=105   // -100mm
+  //106   1006  ID=106   // -225mm
+  //201   2000  ID=107   // On-axis
+
+BE_Spectrum
+  PlotType=Curves
+  RefNodes="Spectrum"
+  GraphHeader="SPL On-axis"
+  BodeType=LeveldB;  Range=50
+  101   2001  ID=201  // 700mm on-axis
+  //102   2002  ID=202  // 500mm on-axis
+  //103   2003  ID=203  // 200mm on-axis
+  //104   2004  ID=204  // 100mm on-axis
+
+
+Radiation_Impedance
+  GraphHeader="Radiation Impedance"
+  BodeType=Complex
+  RadImpType=Normalized
+  101   1001 1001   ID=301
+  102   1001 1002   ID=302  // Mutual only vented
+  103   1002 1001   ID=303  // Mutual only vented
+  104   1002 1002   ID=304
+
+LE_Spectrum
+  GraphHeader="Velocity of VC"
+  AnalysisType=Velocity
+  System="S1"
+  101   ElName="Drv1"  ID=401
+LE_Spectrum "Voltage"
+  GraphHeader="Voltage"
+  AnalysisType=Voltage
+  BodeType=LeveldB
+  101 System=S1
+  
+LE_Spectrum
+  GraphHeader="Drv Point Impedance"
+  AnalysisType=Impedance
+  System="S1"
+  ID=501

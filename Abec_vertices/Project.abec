@@ -1,0 +1,14 @@
+ 
+; ABEC Project File
+ 
+[Project]
+Scriptname_InfoFile=
+[Solving]
+Scriptname_Solving=..\SolvingBassReflexBB4.txt
+[DirectSound]
+Scriptname_DirectSound=
+[LEScript]
+Scriptname_LEScript=LE.txt
+[Observation]
+C0=field.txt
+C1=spec.txt
