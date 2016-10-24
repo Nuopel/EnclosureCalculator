@@ -40,10 +40,9 @@ if length(ct.choice)== length(ct.Ql)*length(ct.kind)
     return;
 end
 
-%% Constants definitions to for closed box design
+%% Constants definitions to for bassreflex box design
 bassreflex.Vb=speaker.Vas./bassreflex.alpha; % volume of the box
 bassreflex.fb=speaker.fs*bassreflex.line(:,2);% resonance frequency of the closedbox
-
 bassreflex.f3=bassreflex.line(:,4)*speaker.fs;% -3db cut off
 % not working ?
 %% Define ratio size of the different enclosure configuration 

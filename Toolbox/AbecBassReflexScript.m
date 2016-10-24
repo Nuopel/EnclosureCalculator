@@ -71,7 +71,7 @@ else
 end
 
 fprintf(fileID,'Ddv=%g; //diameter vent\n',bassreflex.dv*1e-2);
-Leduct=170^2/(pi*bassreflex.Vb(ct.index)*1e-3)*(bassreflex.dv*1e-2/bassreflex.fb(ct.index))^2;
+Leduct=23562.5*bassreflex.dv^2/(bassreflex.Vb(ct.index)*bassreflex.fb^2)-0.632*bassreflex.dv;
 fprintf(fileID,'Lev=%g; //length vent\n\n}\n\n\n',Leduct);
 
 fprintf(fileID,'//_________________________________________________\n// ____________Nodes definition_______________________\n//_________________________________________________\n\n');
