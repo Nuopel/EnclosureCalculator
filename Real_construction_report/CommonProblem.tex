@@ -1,0 +1,110 @@
+\documentclass[twoside,twocolumn]{report}
+
+%\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} 
+%\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8x]{inputenc}% accents
+\usepackage[frenchb]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=20mm,columnsep=17pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Porous Titre   $\bullet$ Date  } % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{amsmath} % Customizing the title section
+\usepackage{graphicx,epstopdf}
+\usepackage{mathtools}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+%% biber use
+\usepackage[autostyle]{csquotes}
+%\usepackage[backend=biber,style=authoryear-icomp,sortlocale=de_DE,natbib=true,url=false, doi=true,eprint=false]{biblatex}
+%\addbibresource{Thesis.bib}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Problème commun ou rencontré à la construction} % Article title
+\author{%
+\textsc{Samuel Dupont}\\ %\thanks{A thank you or further information} \\[1ex] 
+%\normalsize Université du Maine \\ % Your institution
+\normalsize \href{mailto:Samuel.dupont.etu@univ-lemans.fr}{Samuel.dupont.etu@univ-lemans.fr } 
+}
+
+\date{January 10, 2017 \\ Last update: \today}
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Print the title
+\maketitle
+
+
+		 
+
+%\printbibliography
+
+\end{document}
+\chapter{Chapter 1}
+\section{Introduction}
+
+\begin{itemize}
+	\item i1,
+	\item i1
+\end{itemize}
+
+
+\begin{figure}[h!]
+	\centering
+	%		\includegraphics[width=240px]{./images/poreux.jpg}
+	\caption{Exemple de poreux, zoom sur la structure d'une mousse.}
+	\label{poreux1}
+\end{figure}
+	\begin{figure}[h!]
+		\begin{minipage}[c]{.45\linewidth}
+			\begin{center}
+				\makebox[0pt]{\includegraphics[width=255px]{./images/img1.jpg}}
+				\caption{titre}
+				\label{label}
+			\end{center}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[c]{.45\linewidth}
+			\begin{center}
+				\makebox[0pt]{\includegraphics[width=255px]{./images/i2.jpg}}
+				\caption{titre}
+				\label{label2}
+			\end{center}
+		\end{minipage}
+	\end{figure}
