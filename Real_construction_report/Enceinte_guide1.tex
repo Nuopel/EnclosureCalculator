@@ -1,0 +1,229 @@
+\documentclass[a4paper,english]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+%\usepackage[cyr]{aeguill}
+
+
+
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
+
+
+%\usepackage{textcomp}
+
+\usepackage{graphicx,epstopdf}% convert eps to pdf
+\usepackage[section]{placeins}% allow graph in section
+
+
+\usepackage{xcolor} 
+\usepackage{pdfpages}% add pdf pages
+\usepackage{multicol}% create simpli column
+\usepackage{float}
+\pagenumbering{arabic} % numerotation des pages
+\pagestyle{empty} %No headings for the first pages.
+
+\usepackage{cite}% bibtex
+\usepackage{todonotes}% insert todo
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}% abs function
+
+\usepackage{hyperref}% hyperlien
+\usepackage{textcomp} % euro symbole
+
+\usepackage{glossaries}
+\makeglossaries
+%%%%% numbering
+\usepackage{etoolbox}
+\tracingpatches
+\makeatletter
+\newcommand{\makeCondensedChap}{%
+	\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}%
+	\patchcmd{\@makeschapterhead}{\vskip 40\p@}{}{}{}%
+}
+%%%%%reduce spacing
+\def\@makechapterhead#1{%
+	%%%%\vspace*{50\p@}% %%% removed!
+	{\parindent \z@ \raggedright \normalfont
+		\ifnum \c@secnumdepth >\m@ne
+		\huge\bfseries \@chapapp\space \thechapter
+		\par\nobreak
+		\vskip 20\p@
+		\fi
+		\interlinepenalty\@M
+		\Huge \bfseries #1\par\nobreak
+		\vskip 40\p@
+	}}
+	\def\@makeschapterhead#1{%
+		%%%%%\vspace*{50\p@}% %%% removed!
+		{\parindent \z@ \raggedright
+			\normalfont
+			\interlinepenalty\@M
+			\Huge \bfseries  #1\par\nobreak
+			\vskip 40\p@
+		}}
+		
+		\makeatletter
+		\let\latexps@plain\ps@plain
+		\newcommand{\frontmatter}{\let\ps@plain\ps@empty\pagestyle{empty}}
+		\newcommand{\mainmatter}{%
+			\let\ps@plain\latexps@plain\pagestyle{plain}%
+			\clearpage
+			\pagenumbering{arabic}}
+		\makeatother
+		
+		\begin{document}
+			\frontmatter % begin page without numerotation
+			
+			\newcommand{\HRule}{\rule{\linewidth}{1m}}
+			\newcommand*{\figuretitle}[1]{%
+				{\centering%   <--------  will only affect the title because of the grouping (by the
+					\large
+					\textbf{#1}%              braces before \centering and behind \medskip). If you remove
+					\par\medskip}%            these braces the whole body of a {figure} env will be centered.
+			}
+			
+			\huge
+			\begin{center}
+				\fbox{\parbox{0.8\textwidth }{\centering Réalisation d'une enceinte\\ 2}}\\
+			\end{center}
+			\large
+			
+			Ce pdf montre un petit récapitulatif des différentes étapes utilisé pour monter une enceinte.
+			\chapter{Introduction}
+			\section{Outils}
+			\begin{itemize}
+				\item Scie circulaire.
+				\item Guide plat (planche plate).
+				\item Serre joints.
+				\item Presse carrés.
+				\item Presses d'angles.
+				\item Perceuse.
+				\item Rouleau à peinture.
+			\end{itemize}
+			
+			\section{Budget}
+			Pour la partie électronique et haut parleurs, j'ai principalement acheté sur \href{http://loudspeakerfreaks.com/intro.asp}{Loudspeakerfreaks.com}:
+			\begin{itemize}
+				\item 2 tweeter TB 28-847SD 50\texteuro
+				\item 2 Woofer DC200-8 50\texteuro
+				\item divers électronique (capas, bobines, connecteurs) 50\texteuro
+
+			\end{itemize}
+			Pour la partie construction:
+			\begin{itemize}
+				\item Planche mdf 15mm 50\texteuro (chutes et découpe comprise) 
+				\item Colle, joint, pied, tampon... 30\texteuro
+				\item temps passé 0\texteuro.				
+			\end{itemize}
+			\chapter{Conception}
+			Afin de réaliser ces enceinte je me suis principalement servi du livre "Enceintes Acoustiques et Hauts Parleurs" de Vance Dickinson.\\
+			 J'ai complété par des simulations utilisant \href{http://www.randteam.de/AkAbak/Index.html}{Akabak} qui est un logiciel gratuit et extrêmement puissant. J'ai développé au passage un outil Matlab qui permet de créer des scripts Akabak directement depuis les caractéristiques \href{http://www.toutlehautparleur.com/parametres-thiele-and-small}{T/S} des HP basé sur le livre précédent. Le logiciel matlab peux se retrouver sur \href{https://github.com/Nuopel/EnclosureCalculator}{mon Github}(mais je n'ai pas encore fait la docu...). \\
+			 Pour des simulations plus poussé j'ai utilisé \href{http://www.randteam.de/ABEC3/Index.html}{ABEC3} successeur d'Akabak utilisant les éléments finis.\\
+			 J'ai fait les dessins de construction avec Solidworks.\\ \\
+			 
+			 On retrouve dans la figure suivantes les simulations Akabak généré par Matlab.
+			 J'ai choisit la configuration noir, qui est la plus lisse pour un volume de 36L.			 
+			 				\begin{figure}[H]
+			 					\centering
+			 					\includegraphics[scale=0.4]{./image/frf.png}
+			 					\label{Planche}
+			 					\caption{Simulation akabak}
+			 				\end{figure}
+			 
+			 
+			\chapter{Réalisation}
+			\section{Planches de bois}
+			Je n'avais pas envie de prendre le temps de découper les planches de bois j'ai donc été à Castorama pour faire les découpes qui seront droites et d'équerres.\\
+			Je trouve que le 20mm fait trop gros, je change donc pour du 16mm.
+			Je m'en tire pour 50\texteuro de planches de bois: 36\texteuro le panneau, 14\texteuro la découpe et des grosses chutes de bois qui pourront servir à autre choses.\\
+			Cependant mauvaise surprise il s'agit en fait de 15mm et les découpes des planche de devants et derrière sont deux mm trop courtes. C'est pas bien grave, au final il faudra juste raboter le bout des planche de coté de 2mm.
+			
+			\section{Découpe des ronds}
+			Pour les trous des évents et des tweeters, j'ai utilisé une scie cloche monté sur une perceuse à colonne.\\
+			Pour les trous des woofers une scie circulaire.\\
+			Les ajustement sont fait à la lime.\\
+			Je n'ai malheureusement pas de défonceuse, cela m'aurait pourtant bien été utile pour faire les trous et pouvoir mettre les haut parleurs à fleur de surfaces (notament pour éviter les réflexions du tweeter).
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.25]{./image/DSC_0200b.JPG}
+					\label{Planche}
+					\caption{Trou des HP}
+				\end{figure}			
+			
+
+			
+			\section{Pré trous de vissage}
+			Dans le but d'avoir des planches bien d'équerre et serré pour limiter les fuites, j'ai utilisé des visses à bois.\\
+			Pour éviter de faire craquer le bois mais aussi pour que les visses s'enfoncent bien droite, j'ai fait des pré-trous préalablement tracé sur les devants. Ils sont à trois centimètres du bord minimum. Ils sont troué à l'aide d'une perceuse à colonne qui permet de faire un trou droit contrairement à la perceuse qui se penche facilement.\\
+			\section{Assemblage de la boite pour tweeter}
+			Dans cette enceinte j'ai choisit de séparer le woofer du tweeter tout en conservant les deux dans la même enceinte, j'ai donc réalisé une petite boite qui se met à l'intérieur.\\
+			Je découpe les planches des chutes de bois obtenus à Castorama avec une petite scie circulaire.\\
+			J'obtiens 8 planches 12x10 et 2 planches 12x12.\\
+			Je les assemblent avec une presse d'angles pour obtenir deux boites.\\
+			Ne pas oublier de mettre le joint à l'intérieur avant de fixer sur la planche. Les boites sont prêtes à être collé/vissé sur l'avant avec l'aide d'un serre joint.\\
+				\begin{figure}[H]
+					\centering
+					
+				\end{figure}		
+			    \begin{figure}[h!]
+					 	
+					 	\begin{minipage}[c]{.45\linewidth}
+					 		\begin{center}
+					 			\includegraphics[scale=0.2]{./image/DSC_0198b.JPG}
+					 			\label{Boite tweeter}
+					 			\caption{Boite tweeter}
+					 		\end{center}
+					 	\end{minipage}
+					 	\hfill
+					 	\begin{minipage}[c]{.45\linewidth}
+					 		\begin{center}
+					 		\rotatebox{90}{\includegraphics[scale=0.2]{./image/DSC_0202b.JPG}}
+					 		\label{Ajout du boite tweeter}
+					 		\caption{Ajout du boite tweeter}
+					 		\end{center}
+					 	\end{minipage}
+					 \end{figure} 	
+			
+			\section{Assemblage de la boite principale}
+			Je colle les morceaux en commençant par les planches devant et derrière avec la planche du dessous.\\ Avant de coller j'utilise les presses d'angles pour avoir le montage. Je perce les trous de vis qui s'enfonce dans la tranche en passant par les pré-trous de la planche devant et derrière avec une perceuse. Les trous obtenu sont donc bien en face pour un meilleur rendu.\\
+			Je colle, visse les planches et utilise les serres angles pour bien ajuster les angle.\\
+			Je finis par les coté en utilisant la même procédure en utilisant un presse a cadre pour ajuster.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.3]{./image/DSC_0203b.JPG}
+					\label{Boite principlae}
+					\caption{Boite principale}
+				\end{figure}			
+			 
+			\section{Ajustement}
+			Bien qu'il n'y ait que très peu de dépassement, je passe un coup de ponceuse pour fignoler et enlever les 2mm dû au mauvais découpage de Casto.
+			\section{Joint}
+			La boite obtenue précédemment est ouverte au dessus pour permettre de mettre du joint à l'intérieur et ainsi prévenir les fuites d'airs.\\
+			Le fait que j'avais déjà collé la boite du tweeter gênait pour mettre le joint, il aurait donc mieux fallut la mettre après. 
+			\section{Peinture}
+			Sur conseil de Point vert, je ne met pas de primaire mais seulement de la peinture. Donc ponçage de la surface, balayette pour enlever la poussière et alcool à bruler pour nettoyer la surface.
+			\section{Remplissage}
+			Je ne remplis que la boite du tweeter avec de la laine de verre pour amortir. La boite principale étant accordé sur un bass reflex, il n'y a pas lieu d'en mettre ou très peu, je verrais à l'écoute et à la mesure.
+			\section{Partie électronique}
+			L'enceinte étant constitué de deux haut-parleurs, il est évident il faut utiliser des filtres électroniques..\\
+			En effet les deux haut-parleurs utilisés comportent une plage de fréquences qui se recoupe, sans les filtres cette partie se retrouve amplifié par rapport aux plages de fréquences qui ne se recoupe pas. Pour empêcher cette amplification un filtre passe bas est appliqué sur le tweeter et un filtre passe haut sur le woofer.\\ Les filtres choisit sont des Linkwitz–Riley d'ordres 2.\\ \\ La meilleur chose à faire est de monter ces filtre sur un pcb cependant je n'ai pas moyen de le faire j'ai donc soudé entre eux les composants, comme sur la photos \ref{Filtre d'une enceinte}. Le résultats fonctionne très bien cependant ce n'est pas très propre... Je prévoirais un pcb coute que coute la prochaine fois.
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.3]{./image/filterb.JPG}
+				\label{Filtre d'une enceinte}
+				\caption{Filtre d'une enceinte}
+			\end{figure}			
+		\chapter{Conclusion}
+		Au final j'obtiens deux bonnes grosses enceintes! La peinture couleurs unie c'est pas forcément le top, je penserai le design un peu mieux la prochaine fois. Mais elles sonnent cependant très bien et tiennent bien la puissance!
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{./image/finishedb}
+			\label{end}
+			\caption{Enceintes finies}
+		\end{figure}
+		
+			
+			
+		\end{document} 
