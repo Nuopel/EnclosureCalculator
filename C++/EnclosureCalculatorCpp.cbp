@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="EnclosureCalculatorCpp" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/EnclosureCalculatorCpp" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="eigen-eigen-b9cd8366d4e8" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="eigen-eigen-b9cd8366d4e8" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="eigen-eigen-b9cd8366d4e8" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Header/ClosedBoxCalculator.h" />
+		<Unit filename="Header/Filter.h" />
+		<Unit filename="Header/NewtonMethod.h" />
+		<Unit filename="Header/bassreflex.h" />
+		<Unit filename="Header/enclosure.h" />
+		<Unit filename="Header/speaker.h" />
+		<Unit filename="Source/ClosedBoxCalculator.cpp" />
+		<Unit filename="Source/Filter.cpp" />
+		<Unit filename="Source/NewtonMethod.cpp" />
+		<Unit filename="Source/bassreflex.cpp" />
+		<Unit filename="Source/enclosure.cpp" />
+		<Unit filename="Source/speaker.cpp" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
