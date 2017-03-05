@@ -1,0 +1,284 @@
+\documentclass[a4paper,english]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[french]{babel}
+%\usepackage[cyr]{aeguill}
+
+
+
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
+
+
+%\usepackage{textcomp}
+
+\usepackage{graphicx,epstopdf}% convert eps to pdf
+\usepackage[section]{placeins}% allow graph in section
+
+
+\usepackage{xcolor} 
+\usepackage{pdfpages}% add pdf pages
+\usepackage{multicol}% create simpli column
+\usepackage{float}
+\pagenumbering{arabic} % numerotation des pages
+\pagestyle{empty} %No headings for the first pages.
+
+\usepackage{cite}% bibtex
+\usepackage{todonotes}% insert todo
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}% abs function
+
+\usepackage{hyperref}% hyperlien
+\usepackage{textcomp} % euro symbole
+
+\usepackage{glossaries}
+\makeglossaries
+%%%%% numbering
+\usepackage{etoolbox}
+\tracingpatches
+\makeatletter
+\newcommand{\makeCondensedChap}{%
+	\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}%
+	\patchcmd{\@makeschapterhead}{\vskip 40\p@}{}{}{}%
+}
+%%%%%reduce spacing
+\def\@makechapterhead#1{%
+	%%%%\vspace*{50\p@}% %%% removed!
+	{\parindent \z@ \raggedright \normalfont
+		\ifnum \c@secnumdepth >\m@ne
+		\huge\bfseries \@chapapp\space \thechapter
+		\par\nobreak
+		\vskip 20\p@
+		\fi
+		\interlinepenalty\@M
+		\Huge \bfseries #1\par\nobreak
+		\vskip 40\p@
+	}}
+	\def\@makeschapterhead#1{%
+		%%%%%\vspace*{50\p@}% %%% removed!
+		{\parindent \z@ \raggedright
+			\normalfont
+			\interlinepenalty\@M
+			\Huge \bfseries  #1\par\nobreak
+			\vskip 40\p@
+		}}
+		
+		\makeatletter
+		\let\latexps@plain\ps@plain
+		\newcommand{\frontmatter}{\let\ps@plain\ps@empty\pagestyle{empty}}
+		\newcommand{\mainmatter}{%
+			\let\ps@plain\latexps@plain\pagestyle{plain}%
+			\clearpage
+			\pagenumbering{arabic}}
+		\makeatother
+		
+		%----------------------------------------------------------------------------------------
+		\usepackage{titlesec} % Allows customization of titles
+		\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+
+		\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+		\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+		
+		\usepackage{fancyhdr} % Headers and footers
+		\pagestyle{fancy} % All pages have headers and footers
+		
+
+	
+		
+		\title{				\fbox{\parbox{0.8\textwidth }{\centering Réalisation d'une enceinte\\ 2}}\\ } % Article title
+		\author{%
+			\textsc{Samuel Dupont}\\ %\thanks{A thank you or further information} \\[1ex] % Your name
+			%\normalsize Université du Maine \\ % Your institution
+			\normalsize \href{mailto:Samuel.dupont.etu@univ-lemans.fr}{Samuel.dupont.etu@univ-lemans.fr } 
+		}
+		
+		\date{December 28, 2016 \\ Last update: \today}
+
+		
+		\begin{document}
+			\maketitle
+			\frontmatter % begin page without numerotation
+
+				\begin{abstract}
+					\noindent 
+					
+				Ce pdf a pour but de rapporter les différentes étapes de la conception d'une enceinte, en partant du choix des haut-parleurs et en passant par les différentes simulations, le choix des matériaux, leur usinage, l'assemblage des boites, la mise en place de  la partie électronique et les finitions.\\ \\
+				Le but est de créer une enceinte 3 voies dont les deux voies médium-aiguë seront situés sur une enceinte d'étagère et la troisième sur un caisson au sol pour les basses. La réalisation électrique sera en passif: les filtres seront en aval de l'amplificateur.
+				\end{abstract}
+			
+
+			
+			\chapter{Introduction}
+			
+			\chapter{Bilan matériel}
+			\section{Outils}
+			\begin{itemize}
+				\item Scie circulaire.
+				\item Défonceuse.
+				\item Guide plat (planche plate).
+				\item Serre joints.
+				\item Presses carrés.
+				\item Presses d'angles.
+				\item Perceuse.
+				\item Rouleau à peinture.
+			\end{itemize}
+			
+			\section{Budget}
+			Pour la partie électronique et haut parleurs, j'ai principalement acheté sur \href{http://loudspeakerfreaks.com/intro.asp}{Loudspeakerfreaks.com}:
+			\begin{itemize}
+				\item 2 tweeter Monacor DT-107-8 56.82 \texteuro
+				\item 4 haut parleurs Celestion TF510-8 85.40\texteuro
+				\item divers électronique (capas, bobines, connecteurs) 70\texteuro
+
+			\end{itemize}
+			Pour la partie construction:
+			\begin{itemize}
+				\item Planche de bois massif 18mm 22\texteuro 
+				\item Colle, joint, pied, tampon... 30\texteuro
+				\item temps passé 0\texteuro.				
+			\end{itemize}
+			
+			\chapter{Réalisation}
+			
+			\section{Choix des Haut-parleur}
+			Le but étant de créer une enceinte 3 voix, il s'agit de trouver 3 Haut-parleurs différents couvrant le spectre audio de 20Hz-20kHz.\\
+			D'un point de vue design je choisis qu'il y ait deux haut-parleurs medium et un tweeter sur une enceinte pour étagère et un woofer séparer par enceinte.\\
+			Le fait de placer les deux hp medium en série permet de remonter l'impédance totale à 3.2 Ohm qui est faible mais reste supportable pour un amplificateur.\\
+			La sensitivité de deux hp séries est cependant diminué de 3dB. \\
+			En choisissant le Celestion TF510 à 91 dB cela ramène la sensitivité à 89 dB, le tweeter Monacor DT-107 à quand à lui une sensitivité de 90 dB se qui fait un bon appairage.\\
+			Le fait d'avoir deux hp pourrait permettre une tentative de directivité cardioïde, qui diminuerais les réflexions et donc les effets de salle.
+			
+			\chapter{Simulation}
+			La première étape une fois les hauts parleurs de choisit est de démarrer les simulations. J'utilise Akabak comme premier jet à partir du livre de Vance Dickason, je peux voir ainsi la réponse en fréquence  avec différents volumes et choisir celle qui me convient le plus.\\ 
+			\\
+			Dans un second temps j'utilise Abec3 un logiciel de simulation qui utilise les élément finis pour calculer la réponse de l'enceinte en prenant en compte les réflexions de la structure et sa structure.\\
+			
+
+					
+			\section{Simulation initiale utilisant Akabak} 
+			Étant donnée que je vais construire l'enceinte en deux temps le medium-aigue d'abord je vais créer un bass reflex qui pourra éventuellement se boucher et devenir une enceinte close. Je vais donc réaliser les simulations pour les deux configurations.\\
+			
+			
+			
+			\subsection{Bass reflex}
+			La figure \ref{simubassr} montre un exemple de résultat produit par akabak pour une bass reflex pour 3 différentes configurations. Les simulations ne sont pas très heureuse mais la configuration BB4 qui a un volume de 8L semble acceptable.\\
+ 				\begin{figure}[H]
+ 					\centering
+ 					\includegraphics[width=480px]{./image/bassreflex_tf510.png}
+ 					\label{simubassr}
+ 					\caption{Simulation Akabak Bassreflex}
+ 				\end{figure}
+ 			
+ 			\subsection{Enceinte close}
+ 			La figure \ref{simuclos} montre un exemple de résultat produit par akabak pour une enceinte close.\\ Dans l'optique d'avoir une petite enceinte et au vu des réponses en fréquence, les configurations $Qt_c$ 0.577 et 0.707 soit un volume entre 14-6 L semble acceptable (Le woofer prenant le relais a 300-400 Hz). 
+ 				\begin{figure}[H]
+ 					\centering
+ 					\includegraphics[width=480px]{./image/Clos_tf510.png}
+ 					\label{simuclos}
+ 					\caption{Simulation akabak enceinte close}
+ 				\end{figure}				
+			\section{Circuit électronique}
+			Le filtrage est une partie essentielle des enceintes à plusieurs voies. En effet les différentes voies possèdent un spectre fréquentiel différent qui se superpose. Cette superposition provoque un boost des fréquences concernées, pour éviter cet effet il faut filtrer les voies de façon à ce que la superposition ne provoque pas de boost mais un spectre uniforme quelque soit la fréquence.\\
+			\\
+			Le choix se porte sur un filtre de second ordre comme présenté sur la figure \ref{filter}, bien qu'un filtre d'ordre supérieur aurait été mieux, le coup engendré par les composants passif limite beaucoup.\\
+			Il s'agit d'un filtre passe partout (APC), il y a cependant des précautions à prendre, vu qu'il génère un boost de 2dB dans les basses fréquences et les bobines ont une résistance induisant des pertes. Il est cependant possible d'utiliser un circuit atténuateur pour rééquilibrer les pertes.\\ 
+			\\
+			L'impédance complexe du haut parleur montré sur l'image \ref{Zimp} peut provoquer effets indésirable pour les filtres, il peut donc être utilisé des filtres de compensation d'impédance, montré figure \ref{impcomp},  sur les voies pour diminuer ces effet et obtenir l'effet désiré. La contrainte de prix vient une fois encore limiter le circuit, la compensation de la voie inférieur prenant des valeur de bobine assez cher.\\
+			
+ 				\begin{figure}[H]
+ 					\centering
+ 					\includegraphics[width=300px]{./image/filter.png}
+ 					\label{filter}
+ 					\caption{Second order filter from  http://www.diyaudioandvideo.com/Calculator/ApcSpeakerCrossover/ }
+ 				\end{figure}				
+			
+ 				\begin{figure}[H]
+ 					\centering
+ 					\includegraphics[width=240px]{./image/ZHP.png}
+ 					\label{Zimp}
+ 					\caption{Impédance d'un haut parleur }
+ 				\end{figure}
+ 					\begin{figure}[H]
+ 						\centering
+ 						\includegraphics[width=200px]{./image/Impedance_compensation.png}
+ 						\label{impcomp}
+ 						\caption{Impedance compensation }
+ 					\end{figure}
+ 			
+			\section{Simulation avec Abec}
+			
+			\chapter{Conception}
+					  
+			 	
+			
+			\section{Planches de bois}
+
+			
+			\section{Découpe des ronds}
+
+				\begin{figure}[H]
+					\centering
+%					\includegraphics[scale=0.25]{./image/DSC_0200b.JPG}
+					\label{Planche}
+					\caption{Trou des HP}
+				\end{figure}			
+			
+
+			
+			\section{Pré trous de vissage}
+
+			\section{Assemblage de la boite pour tweeter}
+
+		
+			    \begin{figure}[h!]
+					 	
+					 	\begin{minipage}[c]{.45\linewidth}
+					 		\begin{center}
+%					 			\includegraphics[scale=0.2]{./image/DSC_0198b.JPG}
+					 			\label{Boite tweeter}
+					 			\caption{Boite tweeter}
+					 		\end{center}
+					 	\end{minipage}
+					 	\hfill
+					 	\begin{minipage}[c]{.45\linewidth}
+					 		\begin{center}
+%					 		\rotatebox{90}{\includegraphics[scale=0.2]{./image/DSC_0202b.JPG}}
+					 		\label{Ajout du boite tweeter}
+					 		\caption{Ajout du boite tweeter}
+					 		\end{center}
+					 	\end{minipage}
+					 \end{figure} 	
+			
+			\section{Assemblage de la boite principale}
+
+				\begin{figure}[H]
+					\centering
+%					\includegraphics[scale=0.3]{./image/DSC_0203b.JPG}
+					\label{Boite principlae}
+					\caption{Boite principale}
+				\end{figure}			
+			 
+			\section{Ajustement}
+
+			\section{Joint}
+
+			\section{Peinture}
+
+			\section{Remplissage}
+
+			\section{Partie électronique}
+
+		
+			\begin{figure}[H]
+				\centering
+%				\includegraphics[scale=0.3]{./image/filter.JPG}
+				\label{Filtre d'une enceinte}
+				\caption{Filtre d'une enceinte}
+			\end{figure}			
+		\chapter{Conclusion}
+
+
+		
+			
+			
+		\end{document} 
