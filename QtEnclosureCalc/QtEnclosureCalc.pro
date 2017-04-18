@@ -5,13 +5,17 @@ SOURCES += \
     fenetre.cpp \
     speaker.cpp \
     filter.cpp \
-    enclosure.cpp
+    enclosure.cpp \
+    closedbox.cpp \
+    newtonsolver.cpp
 
 HEADERS += \
     fenetre.h \
-    secondfenetrespeaker.h \
     filter.h \
-    enclosure.h
+    enclosure.h \
+    closedbox.h \
+    speaker.h \
+    newtonsolver.h
 
 DISTFILES += \
     TestForm.ui.qml \

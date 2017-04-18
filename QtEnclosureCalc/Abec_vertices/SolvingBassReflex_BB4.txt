@@ -1,0 +1,203 @@
+Control_Solver 
+f1=20;  f2=500;  NumFrequencies=10;  Abscissa=log; 
+ImpedanceNumFrequencies=250 
+Dim=3D 
+Sym=x 
+MeshFrequency=500Hz 
+
+
+SubDomain_Properties 'Enclosure'
+SubDomain=1
+ElType=Interior 
+Color='Green'
+
+SubDomain_Properties 'Vent'
+SubDomain=2
+ElType=Interior 
+ Color='blue'
+
+SubDomain_Properties 'Exterior'
+SubDomain=3 
+ ElType=Exterior //Radiation to infinity
+
+
+Formula "taille"
+{
+
+He=0.388842; // Hauteur exterieur
+Le=0.239287; //Longueur exterieur
+Pe=0.149554; // Profondeur exterieur
+
+hi=0.352842;// Hauteur exterieur
+li=0.203287;// Longueur exterieur
+pin=0.113554;// Profondeur exterieur
+
+d=0.018000;//thichness of the wood pannel
+
+dDw=0.127000; // Diameter of cone
+tD1w=0.030000; // Inner depth of cone to base of dust cap
+dD1w=0.015000; // Diameter of dust cap
+hD1w=0.010000;  // Height of dust cap  
+
+dDt=0.031000;        // Diameter of cone
+tD1t=0.030000;       // Inner depth of cone to base of dust cap
+dD1t=0.005000;    // Diameter of dust cap
+hD1t=0.005000;   // Height of dust cap 
+
+Ddv=0.010333; //diameter vent
+Lev=0.002749; //length vent
+
+}
+
+
+//_________________________________________________
+// ____________Nodes definition_______________________
+//_________________________________________________
+
+Nodes   "NF"
+ //--------- Interior--------------------
+//---------------------------------------
+
+Scale=1m
+1 {0} {+d} {d}
+2 {0} {hi+d} {d}
+3 {li/2} {hi+d} {d}
+4 {li/2} {+d} {d}
+5 {li/2} {+d} {pin+d}
+6 {0} {+d} {pin+d}
+7 {0} {hi+d} {pin+d}
+8 {li/2} {hi+d} {pin+d}
+
+//---------Exterior--------------------
+//--------------------------------------
+
+201 {0} {0} {0}
+202 {0} {He} {-0}
+203 {Le/2} {He} {-0}
+204 {Le/2} {-0} {-0}
+205 {Le/2} {0} {Pe+0}
+206 {0} {0} {Pe}
+207 {0} {He} {Pe}
+208 {Le/2} {He} {Pe}
+
+//_________________________________________________
+// ____________Enclosure part______________________
+//_________________________________________________
+
+Elements "Enclosure-int" 
+ RefNodes="NF"
+ SubDomain=1
+ 1003 5 6 7 8
+1006 3 4 5 8
+ 1005 1 6 5 4 
+
+off  WallImpedance
+  RefElements="Enclosure-int"
+  ImpType=Damping
+  Value=0.01
+
+Infinite_Baffle  "IB Front"
+  Subdomain=3 
+  Position=y 
+
+Elements "Enclosure-exterior" 
+  RefNodes="NF"
+  SubDomain=3
+  SwapNormals=true
+  2003 205 206 207 208
+  2006 203 204 205 208
+
+//_______________________________________________
+// ____________vented part_______________________
+//_______________________________________________
+
+// Inner boundary of vent
+ Duct "Vent-Inner"
+  DuctType=Circle
+  SubDomain=2
+  Dd={Ddv}
+  Len={Lev}
+
+// Interface between vent and cabinet 
+Transition "I-Vent-Inner"
+  Subdomain=2,1
+  RefElement="Vent-Inner"
+  RefEdge=2
+
+// Interface between outside and vent 
+Transition "I-Vent-Outer"
+  Subdomain=3,2
+  RefElement="Vent-Inner"
+  RefEdge=1
+
+
+//__________________________________________________
+// __________baffle+ position of elements___________
+//__________________________________________________
+// Front of cabinet, which belongs to exterior boundaries.;
+
+
+Baffle "Exterior"
+  Subdomain=3
+  Vertices=201,202,203,204  "NF"
+  105  Ref="Cone front"   y={0}  x={0.25*He}
+108  Ref="Tweeter front"   y={0}  x={0.75*He}
+
+Baffle "interior" 
+  Subdomain=1 
+ SwapNormals=true
+  Vertices=1,2,3,4  "NF"
+  106  Ref="Cone rear"   y={0}  x={0.25*He-d}
+  107  Ref="Tweeter rear"   y={0}  x={0.75*He-d}
+Baffle "ventbExterior"
+  Subdomain=3
+  Vertices=202,207,208,203  "NF"
+  102  Ref="Vent-Inner"   x={Pe/2}  y=0mm
+
+  Baffle "ventbinterior"
+  Subdomain=1
+  SwapNormals=true
+  Vertices=2,7,8,3  "NF"
+  109  Ref="Vent-Inner"   x={Pe/2-d} y=0mm
+
+//_________________________________________________
+// ____________speaker part________________________
+//_________________________________________________
+
+
+Diaphragm  "Cone front"
+DrvGroup=1001       // Driving group link to observation stage
+  SubDomain=3      // Front side belongs to sub-domain 2
+  NoBaffle
+  Simple=true         // Simple model
+  Side=Front          // Creates elements for the front side of the diaphragm
+   dD={dDw}            // Diameter of cone
+   tD1={tD1w}           // Inner depth of cone to base of dust cap
+  dD1={dD1w}           // Diameter of dust cap
+  hD1={hD1w}          // Height of dust cap
+
+Diaphragm  "Cone rear"
+ Side=Rear                    // This is the rear side of the diaphragm
+  DrvGroup=1002                // Driving group link to observation stage
+  SubDomain=1                  // This side belongs to sub-domain SubDomain=1
+  RefDiaph="Cone front"        // Inherite from "Cone front"
+  HasBaffle=false//true
+
+Diaphragm  "tweeter front"
+    DrvGroup=1003       // Driving group link to observation stage
+  SubDomain=3      // Front side belongs to sub-domain 2  
+      NoBaffle
+  Simple=true         // Simple model
+  Side=Front          // Creates elements for the front side of the diaphragm
+  dD={dDt}            // Diameter of cone
+   tD1={tD1t}           // Inner depth of cone to base of dust cap
+  dD1={dD1t}           // Diameter of dust cap
+  hD1={hD1t}            // Height of dust cap         
+
+Diaphragm  "tweeter rear"
+ Side=Rear                    // This is the rear side of the diaphragm
+  DrvGroup=1004                // Driving group link to observation stage
+  SubDomain=1                  // This side belongs to sub-domain SubDomain=1
+  RefDiaph="tweeter front"        // Inherite from "Cone front"
+  HasBaffle=false//true
+

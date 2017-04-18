@@ -12,18 +12,23 @@
 #include <QLineEdit>
 #include <QList>
 #include <QGridLayout>
+#include <QVector>
+#include <QString>
 
-class AddSpeaker : public QWidget // On hérite de QWidget (IMPORTANT)
+class Speaker : public QWidget // On hérite de QWidget (IMPORTANT)
 {
-    Q_OBJECT
+   // Q_OBJECT
 public:
 
-    AddSpeaker();
+    Speaker();
     void afficherValeur() const;// print value of T/S parameters
     void saveSpeak();// modify the T/S parmeters of a speaker
     void loadSpeaker(const std::string &fname);
     void ebpCalculation();
     void fillparameters();
+    double returnQts();
+    QString nameParameters()const;
+
 
 public slots://homade slot
 
@@ -45,7 +50,7 @@ private:
     QList<QLineEdit *> *qle_list;
 };
 
-int findNearestValueArray2D(std::vector<std::vector<double> >  grille, double Qts);
+int findNearestValueArray2D(QVector<QVector<double> >  grille, double Qts);
 
 std::string selectSpeaker();
 

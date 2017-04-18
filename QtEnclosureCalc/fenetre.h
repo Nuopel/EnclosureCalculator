@@ -16,8 +16,9 @@
 #include <QGridLayout>
 #include <QLabel>
 
-#include <secondfenetrespeaker.h>
+#include <speaker.h>
 #include <enclosure.h>
+#include <closedbox.h>
 #include <filter.h>
 
 
@@ -34,8 +35,8 @@ public slots://homemade slot
     void addSize();
     void reduceSize();
 
-    void GetValueSpeaker();// get value from form if tick checked
-
+    void InitGeneration();// get value from form if tick checked
+    void ShowEnceinteselect(); //show value
 
 
 signals: //homemade signal
@@ -53,15 +54,17 @@ private:
     QCheckBox *m_woofer_tick;
     QCheckBox *m_mid_tick;
     QCheckBox *m_tweet_tick;
+    int choix ;
+    int choixenclosure ;
 
     //QGridLayout *VboxSpeaker;
    // QHBoxLayout *Hboxselect;
     //QVBoxLayout *Vmainbox;
 
    // QVBoxLayout *layout2;
-     AddSpeaker* TSWooferBox;
-     AddSpeaker* TSMidrangeBox;
-     AddSpeaker* TSTweeterBox;
+     Speaker* tsWooferBox;
+     Speaker* tsMidrangeBox;
+     Speaker* tsTweeterBox;
      Enclosure* enclo1;
 };
 

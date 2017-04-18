@@ -1,7 +1,7 @@
-#include <secondfenetrespeaker.h>
+#include <speaker.h>
 
 
-AddSpeaker::AddSpeaker() : associedParameters{"m_fs (Hz)","m_Qes","m_Qts","m_Qms","m_Vas(l)","m_dD(cm)","m_dD1 (cm)(dustcap)","m_tD1 (cm)(deep of cone)","m_hD1(cm)(height of dustcap)","m_Re(ohm)","m_Mms(g)","m_Le(mh)","m_BL"}
+Speaker::Speaker() : associedParameters{"m_fs (Hz)","m_Qes","m_Qts","m_Qms","m_Vas(l)","m_dD(cm)","m_dD1 (cm)(dustcap)","m_tD1 (cm)(deep of cone)","m_hD1(cm)(height of dustcap)","m_Re(ohm)","m_Mms(g)","m_Le(mh)","m_BL"}
 {
     QWidget();
     m_Save  = new QPushButton("Save", this);
@@ -33,7 +33,7 @@ AddSpeaker::AddSpeaker() : associedParameters{"m_fs (Hz)","m_Qes","m_Qts","m_Qms
     this->setLayout(mainlayout);
 }
 
-void AddSpeaker::fillparameters()
+void Speaker::fillparameters()
 {
     QString temp;
     name = qle_list->at(0)->text();
@@ -42,4 +42,33 @@ void AddSpeaker::fillparameters()
         temp = qle_list->at(i)->text();
          speakerParameters[i-1] = temp.toDouble();
     }
+}
+
+double Speaker::returnQts()
+{
+    return speakerParameters[2];
+}
+QString  Speaker::nameParameters()const
+{
+    return *associedParameters;
+}
+
+int findNearestValueArray2D(QVector<QVector<double> >  grille, double Qts)
+{
+    double smallest = abs(grille[0][0]-Qts) ; //declare and initiate smallest value at first case 0
+    //cout<< endl;
+    int position=0;// position of the smallest value
+    for ( int i=1;  i < grille.size();  ++i )
+    {
+        if ( abs(grille[i][0]-Qts)  < smallest )// if case value smaller replace it
+        {
+            smallest=abs(grille[i][0]-Qts);
+            position = i;
+        }
+    }
+
+    if  (abs(grille[position][0]-Qts)>0.04)// if value too far appart send back error
+        return -1;
+
+    return position;
 }

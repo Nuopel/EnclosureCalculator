@@ -5,9 +5,9 @@ MainFenetre::MainFenetre() : QWidget()
     setFixedSize(500, 700);
 
     //Layout bouton vertical
-    QGridLayout *Vmainbox = new QGridLayout;
-    QGridLayout *VboxSpeaker = new QGridLayout;
-    QHBoxLayout *Hboxselect = new QHBoxLayout;
+    QGridLayout *vmainbox =    new QGridLayout;
+    QGridLayout *vboxSpeaker = new QGridLayout;
+    QHBoxLayout *hboxselect =  new QHBoxLayout;
 
 
     // Construction des boutons
@@ -20,10 +20,10 @@ MainFenetre::MainFenetre() : QWidget()
     m_BoutonSpeaker3 = new QPushButton("Add Tweeter ", this);
     m_BoutonSpeaker3->setFont(QFont("Comic Sans MS", 14));
 
-    m_BoutonEnceinteSelect = new QPushButton("Filter", this);
+    m_BoutonEnceinteSelect = new QPushButton("Enclosure kind", this);
     m_BoutonEnceinteSelect->setFont(QFont("Comic Sans MS", 14));
 
-    m_BoutonFilterSelect = new QPushButton("Enclosure kind", this);
+    m_BoutonFilterSelect = new QPushButton("Filter", this);
     m_BoutonFilterSelect->setFont(QFont("Comic Sans MS", 14));
 
     m_BoutonGenerate = new QPushButton("Generate", this);
@@ -37,50 +37,51 @@ MainFenetre::MainFenetre() : QWidget()
 
 
     // link boutons vbox
-    VboxSpeaker->addWidget(m_BoutonSpeaker1,0,0);
-    VboxSpeaker->addWidget(m_BoutonSpeaker2,1,0);
-    VboxSpeaker->addWidget(m_BoutonSpeaker3,2,0);
-    VboxSpeaker->addWidget(m_woofer_tick,0,1);
-    VboxSpeaker->addWidget(m_mid_tick,1,1);
-    VboxSpeaker->addWidget(m_tweet_tick,2,1);
+    vboxSpeaker->addWidget(m_BoutonSpeaker1,0,0);
+    vboxSpeaker->addWidget(m_BoutonSpeaker2,1,0);
+    vboxSpeaker->addWidget(m_BoutonSpeaker3,2,0);
+    vboxSpeaker->addWidget(m_woofer_tick,0,1);
+    vboxSpeaker->addWidget(m_mid_tick,1,1);
+    vboxSpeaker->addWidget(m_tweet_tick,2,1);
 
 
-    Hboxselect->addWidget(m_BoutonEnceinteSelect);
-    Hboxselect->addWidget(m_BoutonFilterSelect);
+    hboxselect->addWidget(m_BoutonEnceinteSelect);
+    hboxselect->addWidget(m_BoutonFilterSelect);
 
-    Vmainbox->addWidget(m_BoutonGenerate,0,0);
+    vmainbox->addWidget(m_BoutonGenerate,0,0);
 
     // set layouts in mother layout
-    Vmainbox->addLayout((VboxSpeaker),1,0);
-    Vmainbox->addLayout((Hboxselect),2,0);
-    this->setLayout(Vmainbox);
+    vmainbox->addLayout((vboxSpeaker),1,0);
+    vmainbox->addLayout((hboxselect),2,0);
+    this->setLayout(vmainbox);
 
     // Enclosure selection
-    Enclosure *enclo1 = new Enclosure();
-    enclo1->show();
-
+    enclo1 = new Enclosure();
 
     // Open new windows
-    TSWooferBox = new AddSpeaker() ;
-    TSMidrangeBox = new AddSpeaker() ;
-    TSTweeterBox = new AddSpeaker() ;
-    QLabel *labelt = new QLabel("Tweeter ",TSTweeterBox);   // titre du layout
-    QLabel *labelm = new QLabel("Midrange ",TSMidrangeBox); // titre du layout
-    QLabel *labelw = new QLabel("Woofer ",TSWooferBox);     // titre du layout
+    tsWooferBox = new Speaker() ;
+    tsMidrangeBox = new Speaker() ;
+    tsTweeterBox = new Speaker() ;
+    QLabel *labelt = new QLabel("Tweeter ",tsTweeterBox);   // titre du layout
+    QLabel *labelm = new QLabel("Midrange ",tsMidrangeBox); // titre du layout
+    QLabel *labelw = new QLabel("Woofer ",tsWooferBox);     // titre du layout
 
-    Vmainbox->addWidget(TSWooferBox,1,1);
-    Vmainbox->addWidget(TSMidrangeBox,1,2);
-    Vmainbox->addWidget(TSTweeterBox,1,3);
-    TSTweeterBox->hide();  // hide fenetre tweeter
-    TSMidrangeBox->hide(); //hide fenetre mid
-    TSWooferBox->hide();   //hide fenetre woofer
+    vmainbox->addWidget(tsWooferBox,1,1);
+    vmainbox->addWidget(tsMidrangeBox,1,2);
+    vmainbox->addWidget(tsTweeterBox,1,3);
+    tsTweeterBox->hide();  // hide fenetre tweeter
+    tsMidrangeBox->hide(); //hide fenetre mid
+    tsWooferBox->hide();   //hide fenetre woofer
 
     QWidget::connect(m_BoutonSpeaker1, SIGNAL(clicked()),this , SLOT(checkedW()) ); // connect bouton woofer to tick
     QWidget::connect(m_BoutonSpeaker2, SIGNAL(clicked()),this , SLOT(checkedM()) ); // connect bouton mid to tick
     QWidget::connect(m_BoutonSpeaker3, SIGNAL(clicked()),this , SLOT(checkedT()) );// connect bouton tweeter to tick
 
     // Obtenir les signaux des boites
-    QWidget::connect(m_BoutonGenerate, SIGNAL(clicked()),this , SLOT(GetValueSpeaker()) ); // connect bouton
+    QWidget::connect(m_BoutonGenerate, SIGNAL(clicked()),this , SLOT(InitGeneration()) ); // connect bouton
+
+    QWidget::connect(m_BoutonEnceinteSelect, SIGNAL(clicked()),this , SLOT(ShowEnceinteselect()) ); // connect bouton
+
   }
 
 void MainFenetre::addSize()
@@ -100,14 +101,14 @@ void MainFenetre::checkedW()
     if(m_woofer_tick->checkState() == false)
     {
         m_woofer_tick->setChecked(true);
-        TSWooferBox->show();
-       addSize();
+        tsWooferBox->show();
+        addSize();
 
     }
     else
     {
         m_woofer_tick->setChecked(false);
-        TSWooferBox->hide();
+        tsWooferBox->hide();
         reduceSize();
     }
 }
@@ -117,13 +118,13 @@ void MainFenetre::checkedM()
     if(m_mid_tick->checkState() == false)
     {
         m_mid_tick->setChecked(true);
-        TSMidrangeBox->show();
+        tsMidrangeBox->show();
         addSize();
     }
     else
     {
         m_mid_tick->setChecked(false);
-        TSMidrangeBox->hide();
+        tsMidrangeBox->hide();
         reduceSize();
     }
 }
@@ -133,32 +134,73 @@ void MainFenetre::checkedT()
     if(m_tweet_tick->checkState() == false)
     {
         m_tweet_tick->setChecked(true);
-        TSTweeterBox->show();
+        tsTweeterBox->show();
         addSize();
 
     }
     else
     {
         m_tweet_tick->setChecked(false);
-        TSTweeterBox->hide();
+        tsTweeterBox->hide();
         reduceSize();
     }
 }
 
-// get values from speakers form if the box is checked
-void MainFenetre::GetValueSpeaker()
+void MainFenetre::ShowEnceinteselect()
 {
+    enclo1->show();
+}
+
+// get values from speakers form if the box is checked
+void MainFenetre::InitGeneration()
+{
+    choix = 0;
+    //Get value of the filled form in variable for calculation
     if(m_woofer_tick->checkState() == true)
     {
-        TSWooferBox->fillparameters();
+        tsWooferBox->fillparameters();
+        choix+=1;
     }
     if(m_mid_tick->checkState() == true)
     {
-        TSMidrangeBox->fillparameters();
+        tsMidrangeBox->fillparameters();
+        choix+=2;
     }
     if(m_tweet_tick->checkState() == true)
     {
-        TSTweeterBox->fillparameters();
+        tsTweeterBox->fillparameters();
+        choix+=4;
+    }
+
+    //Select configuration based on the checkedbox
+    choixenclosure = enclo1->getchoicebox();
+    Closedbox * generated = NULL;
+    switch (choix)
+    {
+        case 0:
+            //code to say nothing
+            break;
+        case 1:
+            generated = new Closedbox(*tsTweeterBox);
+            break;
+        case 2:
+            generated = new Closedbox(*tsMidrangeBox);
+            break;
+        case 3:
+            generated = new Closedbox(*tsMidrangeBox, *tsTweeterBox);
+            break;
+        case 4:
+            generated = new Closedbox(*tsWooferBox);
+            break;
+        case 5:
+            //code nothing
+            break;
+        case 6:
+            generated = new Closedbox(*tsWooferBox,*tsMidrangeBox);
+            break;
+        case 7:
+            generated = new Closedbox(*tsWooferBox,*tsMidrangeBox,*tsTweeterBox);
+            break;
     }
 
 }
