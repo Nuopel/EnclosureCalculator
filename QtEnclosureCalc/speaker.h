@@ -5,6 +5,7 @@
 #include <QFormLayout>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <vector>
 #include <cmath>
 #include <QDialog>
@@ -28,6 +29,8 @@ public:
     void fillparameters();
     double returnQts();
     QString nameParameters()const;
+    QString getName()const;
+    const std::vector<std::string> QtcPossible() const;
 
 
 public slots://homade slot

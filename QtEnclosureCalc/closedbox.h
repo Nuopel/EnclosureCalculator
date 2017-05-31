@@ -2,6 +2,7 @@
 #define CLOSEDBOX
 #include <enclosure.h>
 #include <speaker.h>
+#include <QString>
 
 using namespace std;
 
