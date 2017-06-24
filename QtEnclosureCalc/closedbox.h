@@ -4,7 +4,11 @@
 #include <fstream>
 #include <enclosure.h>
 #include <speaker.h>
+<<<<<<< HEAD
  #include <QGenericMatrix>
+=======
+#include <QString>
+>>>>>>> 4d94345087e03439eb3b4da0e0006b9a2d760490
 
 using namespace std;
 

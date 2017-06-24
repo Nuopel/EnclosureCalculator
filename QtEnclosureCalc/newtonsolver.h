@@ -2,7 +2,11 @@
 #define NEWTONSOLVER
 
 #include <iostream>
+<<<<<<< HEAD
 #include <eigen3/Eigen/LU>
+=======
+#include <Eigen/LU>
+>>>>>>> 4d94345087e03439eb3b4da0e0006b9a2d760490
 using namespace std;
 
 

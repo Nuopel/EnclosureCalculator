@@ -30,8 +30,13 @@ public:
     void fillparameters();
     double returnQts();
     QString nameParameters()const;
+<<<<<<< HEAD
     QString getName() const;
     QVector<QString> QtcPossible();
+=======
+    QString getName()const;
+    const std::vector<std::string> QtcPossible() const;
+>>>>>>> 4d94345087e03439eb3b4da0e0006b9a2d760490
 
 
 public slots://homade slot

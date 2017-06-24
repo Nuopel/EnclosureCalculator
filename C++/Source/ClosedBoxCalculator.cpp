@@ -144,7 +144,7 @@ void closedbox::akabakClosedBoxScript()
     string strFileName="GeneratedScript/closed.aks";
     ofstream ofsaveSpeaker(strFileName.c_str());
     ofsaveSpeaker <<"Def_Driver  '"<< m_speakerbass->getName()<<"' \n";
-    vector<string> QtcPossible(m_speakerbass->QtcPossible());
+   // vector<string> QtcPossible(m_speakerbass->QtcPossible());
 
     //cout << m_parameters[7];
     if(m_parameters[7]!=0)

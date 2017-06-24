@@ -52,6 +52,16 @@ QString  Speaker::nameParameters()const
 {
     return *associedParameters;
 }
+QString Speaker::getName()const
+{
+    return name;
+
+}
+const std::vector<std::string> Speaker::QtcPossible() const
+{
+    return qtcPossible;
+}
+
 
 int findNearestValueArray2D(QVector<QVector<double> >  grille, double Qts)
 {

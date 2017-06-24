@@ -142,8 +142,13 @@ void Closedbox::akabakClosedboxScript()
 {
     QString const associedParameters(speakerbass->nameParameters());
     QString strFileName="GeneratedScript/closed.aks";
+<<<<<<< HEAD
     ofstream ofsaveSpeaker(strFileName.toStdString());
     ofsaveSpeaker <<"Driver 'D1' Def='"<<(speakerbass->getName()).toStdString()<<"' Node=0=1=2=21\n";
+=======
+    ofstream ofsaveSpeaker((strFileName.toStdString()).c_str());
+    ofsaveSpeaker <<"Def_Driver  '"<< ((speakerbass->getName()).toStdString()).c_str()<<"' \n";
+>>>>>>> 4d94345087e03439eb3b4da0e0006b9a2d760490
 
     if(m_parameters[6]!=0)
     ofsaveSpeaker <<"dD="<<m_parameters[5] <<"cm  |Piston \n";
@@ -164,7 +169,11 @@ void Closedbox::akabakClosedboxScript()
 
     for (int ii(0);ii<m_tabParam.size();ii++)
     {
+<<<<<<< HEAD
         ofsaveSpeaker <<"System 'S"<<ii<<"_clos_Qtc_"<<(m_qtcPossible[ii])<<"'";
+=======
+        ofsaveSpeaker <<"System 'S"<<ii<<"_clos_Qtc_"<<m_qtcPossible[ii]<<"'";
+>>>>>>> 4d94345087e03439eb3b4da0e0006b9a2d760490
         ofsaveSpeaker <<"Driver 'D1' Def='"<<(speakerbass->getName()).toStdString()<<"' Node=0=1=2=21\n";
         ofsaveSpeaker <<"Enclosure    'E1'  Node=2\n ";
         ofsaveSpeaker <<" Vb="<<m_volume[ii]<<"L  Qb/fo=1 Lb="<<m_boxDimension[ii][4]<<"m Sb="<<m_boxDimension[ii][4]*m_boxDimension[ii][3]<<"m2\n";
