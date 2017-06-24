@@ -7,7 +7,8 @@ SOURCES += \
     filter.cpp \
     enclosure.cpp \
     closedbox.cpp \
-    newtonsolver.cpp
+    newtonsolver.cpp \
+    bassreflex.cpp
 
 HEADERS += \
     fenetre.h \
@@ -15,7 +16,8 @@ HEADERS += \
     enclosure.h \
     closedbox.h \
     speaker.h \
-    newtonsolver.h
+    newtonsolver.h \
+    bassreflex.h
 
 DISTFILES += \
     TestForm.ui.qml \

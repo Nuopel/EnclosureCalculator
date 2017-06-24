@@ -112,7 +112,7 @@ void Closedbox::calculateEnclosureParameters()
         //define the different dimension of the box
             Eigen::MatrixXd sol(6,1);
             sol= newtonMethodSolver(m_thickness,m_volume[ii]);
-            m_boxDimension.push_back(vector<double>(6));
+            m_boxDimension.push_back(QVector<double>(6));
            // afficherBoxDimension(sol);
             for (int j=0;j<6;j++)
             {
@@ -140,11 +140,10 @@ void Closedbox::calculateEnclosureParameters()
 
 void Closedbox::akabakClosedboxScript()
 {
-    string const associedParameters(speakerbass->nameParameters());
-    string strFileName="GeneratedScript/closed.aks";
-    ofstream ofsaveSpeaker(strFileName.c_str());
-    ofsaveSpeaker <<"Def_Driver  '"<< speakerbass->getName()<<"' \n";
-    vector<string> qtcPossible(speakerbass->qtcPossible());
+    QString const associedParameters(speakerbass->nameParameters());
+    QString strFileName="GeneratedScript/closed.aks";
+    ofstream ofsaveSpeaker(strFileName.toStdString());
+    ofsaveSpeaker <<"Driver 'D1' Def='"<<(speakerbass->getName()).toStdString()<<"' Node=0=1=2=21\n";
 
     if(m_parameters[6]!=0)
     ofsaveSpeaker <<"dD="<<m_parameters[5] <<"cm  |Piston \n";
@@ -165,8 +164,8 @@ void Closedbox::akabakClosedboxScript()
 
     for (int ii(0);ii<m_tabParam.size();ii++)
     {
-        ofsaveSpeaker <<"System 'S"<<ii<<"_clos_Qtc_"<<m_qtcPossible[ii]<<"'";
-        ofsaveSpeaker <<"Driver 'D1' Def='"<<speakerbass->getName()<<"' Node=0=1=2=21\n";
+        ofsaveSpeaker <<"System 'S"<<ii<<"_clos_Qtc_"<<(m_qtcPossible[ii])<<"'";
+        ofsaveSpeaker <<"Driver 'D1' Def='"<<(speakerbass->getName()).toStdString()<<"' Node=0=1=2=21\n";
         ofsaveSpeaker <<"Enclosure    'E1'  Node=2\n ";
         ofsaveSpeaker <<" Vb="<<m_volume[ii]<<"L  Qb/fo=1 Lb="<<m_boxDimension[ii][4]<<"m Sb="<<m_boxDimension[ii][4]*m_boxDimension[ii][3]<<"m2\n";
         ofsaveSpeaker <<" Radiator  'Rad1'  Def='D1' Node=21 \n";

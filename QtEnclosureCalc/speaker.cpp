@@ -55,20 +55,30 @@ QString  Speaker::nameParameters()const
 
 int findNearestValueArray2D(QVector<QVector<double> >  grille, double Qts)
 {
-    double smallest = abs(grille[0][0]-Qts) ; //declare and initiate smallest value at first case 0
+    double smallest = qAbs(grille[0][0]-Qts) ; //declare and initiate smallest value at first case 0
     //cout<< endl;
     int position=0;// position of the smallest value
     for ( int i=1;  i < grille.size();  ++i )
     {
-        if ( abs(grille[i][0]-Qts)  < smallest )// if case value smaller replace it
+        if ( qAbs(grille[i][0]-Qts)  < smallest )// if case value smaller replace it
         {
-            smallest=abs(grille[i][0]-Qts);
+            smallest=qAbs(grille[i][0]-Qts);
             position = i;
         }
     }
 
-    if  (abs(grille[position][0]-Qts)>0.04)// if value too far appart send back error
+    if  (qAbs(grille[position][0]-Qts)>0.04)// if value too far appart send back error
         return -1;
 
     return position;
+}
+
+QString  Speaker::getName() const
+{
+    return name;
+}
+
+QVector<QString> Speaker::QtcPossible()
+{
+    return qtcPossible;
 }

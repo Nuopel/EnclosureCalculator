@@ -1,7 +1,10 @@
 #ifndef CLOSEDBOX
 #define CLOSEDBOX
+#include <iostream>
+#include <fstream>
 #include <enclosure.h>
 #include <speaker.h>
+ #include <QGenericMatrix>
 
 using namespace std;
 

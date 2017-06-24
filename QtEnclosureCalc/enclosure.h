@@ -19,6 +19,7 @@ class Enclosure : public QWidget // On hérite de QWidget (IMPORTANT)
 //Q_OBJECT
 public:
         Enclosure();
+
         ~Enclosure();
 
         int getchoicebox();

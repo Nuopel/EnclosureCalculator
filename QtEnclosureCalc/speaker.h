@@ -5,6 +5,7 @@
 #include <QFormLayout>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <vector>
 #include <cmath>
 #include <QDialog>
@@ -14,6 +15,7 @@
 #include <QGridLayout>
 #include <QVector>
 #include <QString>
+using namespace std;
 
 class Speaker : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -28,6 +30,8 @@ public:
     void fillparameters();
     double returnQts();
     QString nameParameters()const;
+    QString getName() const;
+    QVector<QString> QtcPossible();
 
 
 public slots://homade slot
@@ -46,7 +50,7 @@ private:
     QString associedParameters[numParam];
     double speakerParameters[numParam];
     double ebp;
-    std::vector<std::string> qtcPossible;
+    QVector<QString> qtcPossible;
     QList<QLineEdit *> *qle_list;
 };
 
